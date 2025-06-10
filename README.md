@@ -6,10 +6,11 @@ This is a Flask web application that uses **Google Gemini-Pro** to auto-generate
 
 ## ✨ Features
 
-* 🧠 Generates an email using **Google Gemini-Pro** AI model.
-* 📤 Sends the generated email using **SMTP** (Gmail).
-* 🌐 Clean and simple **Flask**-based web interface.
-* 🔐 Uses `dotenv` to securely manage API keys and credentials.
+* 🧠 Generates emails using **Google Gemini-Pro** AI.
+* 📤 Sends emails via **Gmail SMTP**.
+* 🌐 Flask-based web interface.
+* 🐳 **Docker** support for easy deployment.
+* 🔐 Environment variables via `.env`.
 
 ---
 
@@ -21,20 +22,23 @@ This is a Flask web application that uses **Google Gemini-Pro** to auto-generate
 ├── app.py                 # Main Flask app
 ├── gemini.py              # Email content generator using Gemini
 ├── email_sender.py        # Handles sending email via SMTP
-├── templates/             # HTML templates (index, about, contact, etc.)
-├── static/                # Static files (favicon, CSS, images)
-├── .env                   # Stores sensitive API keys and credentials
-└── README.md              # You're here
+├── templates/             # HTML templates
+├── static/                # Static files (CSS, images, favicon)
+├── requirements.txt       # Python dependencies
+├── Dockerfile             # Docker build file
+├── docker-compose.yml     # Docker Compose config (optional)
+├── .env                   # Environment variables
+└── README.md              # Project documentation
 ```
 
 ---
 
-## 🛠️ Setup Instructions
+## 🛠️ Setup Instructions (Local)
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/ridamansour/email-ai-flask.git
+git clone https://github.com/your-username/email-ai-flask.git
 cd email-ai-flask
 ```
 
@@ -53,44 +57,64 @@ pip install -r requirements.txt
 
 ### 4. Create `.env` File
 
-Create a `.env` file in the root directory with:
-
-```
+```env
 EMAIL_PASS=your_gmail_app_password
 API_KEY=your_google_gemini_api_key
 ```
 
-> **Note:** Use an **App Password** if you have 2FA enabled on your Gmail.
+> ⚠️ Use an **App Password** if Gmail 2FA is enabled.
 
 ---
 
-## ▶️ Run the App
+## ▶️ Run Locally
 
 ```bash
 python app.py
 ```
 
-Visit: `http://127.0.0.1:5000/`
+Open: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+---
+
+## 🐳 Run with Docker
+
+### 1. Build the Image
+
+```bash
+docker build -t email-ai-flask .
+```
+
+### 2. Run the Container
+
+```bash
+docker run -p 5000:5000 --env-file .env email-ai-flask
+```
+
+### Or Use Docker Compose
+
+```bash
+docker-compose up --build
+```
 
 ---
 
 ## 🔐 Security Tips
 
-* Don't hardcode email addresses or credentials.
-* Use HTTPS in production.
-* Validate user input before sending.
+* Keep `.env` secret and add it to `.gitignore`.
+* Use HTTPS and email validation in production.
+* Avoid hardcoding credentials.
 
 ---
 
 ## 💡 Future Ideas
 
-* Store emails in a database (SQLite/PostgreSQL).
-* Add user authentication.
-* Support attachments or CC/BCC.
-* Support multiple language email generation.
+* Save emails to a database.
+* Add login functionality.
+* Export generated emails to PDF.
+* Support multiple languages and attachments.
 
 ---
 
 ## 📜 License
 
-This project is open-source and free to use.
+Free to use and modify.
